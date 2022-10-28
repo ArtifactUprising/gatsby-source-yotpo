@@ -44,7 +44,7 @@ async function pagedGet(
   method,
   options,
   page = 1,
-  pageSize = 75,
+  pageSize = 1000,
   aggregatedResponse = null
 ) {
   const reviews = await method({
