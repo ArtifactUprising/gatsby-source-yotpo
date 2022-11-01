@@ -1,16 +1,23 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getAccessToken = exports.allSiteBottomlines = exports.allReviews = exports.allProductBottomlines = void 0;
+exports.allSiteBottomlines = exports.allProductBottomlines = exports.getCachedData = exports.allReviews = exports.getAccessToken = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
 var _request = _interopRequireDefault(require("request"));
+
+var fs = require('fs');
+
 var getAccessToken = function getAccessToken(_ref) {
   var appKey = _ref.appKey,
-    appSecret = _ref.appSecret,
-    page = _ref.page,
-    pageSize = _ref.pageSize;
+      appSecret = _ref.appSecret,
+      page = _ref.page,
+      pageSize = _ref.pageSize;
   var options = {
     method: "POST",
     url: "https://api.yotpo.com/oauth/token",
@@ -27,34 +34,61 @@ var getAccessToken = function getAccessToken(_ref) {
     });
   });
 };
+
 exports.getAccessToken = getAccessToken;
+
 var allReviews = function allReviews(_ref2) {
   var appKey = _ref2.appKey,
-    accessToken = _ref2.accessToken,
-    page = _ref2.page,
-    pageSize = _ref2.pageSize;
-  var options = {
-    method: "GET",
-    url: "https://api.yotpo.com/v1/apps/".concat(appKey, "/reviews"),
-    qs: {
-      utoken: accessToken,
-      page: page,
-      count: pageSize
-    },
-    json: true
-  };
+      accessToken = _ref2.accessToken,
+      page = _ref2.page,
+      pageSize = _ref2.pageSize;
   return new Promise(function (resolve, reject) {
-    (0, _request["default"])(options, function (error, response, body) {
-      if (error) reject(error);
-      resolve(body.reviews);
+    console.log("getting page ".concat(page));
+
+    _axios["default"].get("https://api.yotpo.com/v1/apps/".concat(appKey, "/reviews"), {
+      params: {
+        utoken: accessToken,
+        page: page,
+        count: pageSize
+      },
+      timeout: 1500,
+      headers: {
+        accept: 'application/json'
+      }
+    }).then(function (response) {
+      console.log('responded!');
+      resolve(response.data.reviews);
+    })["catch"](function (error) {
+      console.log('errored!');
+      reject(error);
     });
   });
 };
+
 exports.allReviews = allReviews;
+
+var getCachedData = function getCachedData() {
+  return new Promise(function (resolve, reject) {
+    _axios["default"].get("https://assets.artifactuprising.com/assets/Yotpo/reviews.json", {
+      timeout: 1500,
+      headers: {
+        accept: 'application/json'
+      }
+    }).then(function (response) {
+      resolve(response.data);
+    })["catch"](function (error) {
+      console.log('errored!');
+      reject(error);
+    });
+  });
+};
+
+exports.getCachedData = getCachedData;
+
 var allProductBottomlines = function allProductBottomlines(_ref3) {
   var appKey = _ref3.appKey,
-    page = _ref3.page,
-    pageSize = _ref3.pageSize;
+      page = _ref3.page,
+      pageSize = _ref3.pageSize;
   var options = {
     method: "GET",
     url: "https://api.yotpo.com/v1/apps/".concat(appKey, "/bottom_lines"),
@@ -71,11 +105,13 @@ var allProductBottomlines = function allProductBottomlines(_ref3) {
     });
   });
 };
+
 exports.allProductBottomlines = allProductBottomlines;
+
 var allSiteBottomlines = function allSiteBottomlines(_ref4) {
   var appKey = _ref4.appKey,
-    page = _ref4.page,
-    pageSize = _ref4.pageSize;
+      page = _ref4.page,
+      pageSize = _ref4.pageSize;
   var options = {
     method: "GET",
     url: "https://api.yotpo.com/products/".concat(appKey, "/yotpo_site_reviews/bottomline"),
@@ -92,5 +128,5 @@ var allSiteBottomlines = function allSiteBottomlines(_ref4) {
     });
   });
 };
+
 exports.allSiteBottomlines = allSiteBottomlines;
-//# sourceMappingURL=yotpo.js.map
