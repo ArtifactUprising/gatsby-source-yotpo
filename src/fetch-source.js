@@ -14,6 +14,9 @@ export default async ({ appKey, appSecret }) => {
     appSecret,
   });
 
+  if (!accessToken) {
+    throw new Error('Access token not found!!!');
+  }
   const reviews = await pagedGet(allReviews, {
     appKey,
     accessToken,
@@ -58,7 +61,7 @@ async function pagedGet(
     aggregatedResponse = aggregatedResponse.concat(reviews);
   }
 
-  if (reviews.length > 0) {
+  if (reviews && reviews.length > 0) {
     return pagedGet(method, options, page + 1, pageSize, aggregatedResponse);
   }
 

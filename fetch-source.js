@@ -37,23 +37,32 @@ var _default = /*#__PURE__*/function () {
 
           case 5:
             accessToken = _context.sent;
-            _context.next = 8;
+
+            if (accessToken) {
+              _context.next = 8;
+              break;
+            }
+
+            throw new Error('Access token not found!!!');
+
+          case 8:
+            _context.next = 10;
             return pagedGet(_yotpo.allReviews, {
               appKey: appKey,
               accessToken: accessToken
             });
 
-          case 8:
+          case 10:
             reviews = _context.sent;
-            _context.next = 11;
+            _context.next = 13;
             return pagedGet(_yotpo.allProductBottomlines, {
               appKey: appKey,
               accessToken: accessToken
             });
 
-          case 11:
+          case 13:
             productBottomlines = _context.sent;
-            _context.next = 14;
+            _context.next = 16;
             return (0, _yotpo.allSiteBottomlines)({
               appKey: appKey,
               accessToken: accessToken,
@@ -61,7 +70,7 @@ var _default = /*#__PURE__*/function () {
               pageSize: 1
             });
 
-          case 14:
+          case 16:
             siteBottomlines = _context.sent;
             console.timeEnd("Fetch Yotpo reviews");
             return _context.abrupt("return", {
@@ -70,7 +79,7 @@ var _default = /*#__PURE__*/function () {
               siteBottomlines: siteBottomlines
             });
 
-          case 17:
+          case 19:
           case "end":
             return _context.stop();
         }
@@ -118,7 +127,7 @@ function _pagedGet() {
               aggregatedResponse = aggregatedResponse.concat(reviews);
             }
 
-            if (!(reviews.length > 0)) {
+            if (!(reviews && reviews.length > 0)) {
               _context2.next = 9;
               break;
             }

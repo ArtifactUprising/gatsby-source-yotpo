@@ -24,10 +24,9 @@ export const sourceNodes = async (
     process.exit(1);
   }
 
-  const { reviews, productBottomlines, siteBottomlines } = await fetchData({
-    appKey: pluginOptions.appKey,
-    appSecret: pluginOptions.appSecret,
-  });
+  const { reviews, productBottomlines, siteBottomlines } = await fetchData(
+    process.env.ASSETS_URL
+  );
 
   await Promise.all(
     reviews.map(async (review) => {

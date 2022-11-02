@@ -43,10 +43,7 @@ var sourceNodes = /*#__PURE__*/function () {
             }
 
             _context7.next = 8;
-            return (0, _fetch["default"])({
-              appKey: pluginOptions.appKey,
-              appSecret: pluginOptions.appSecret
-            });
+            return (0, _fetch["default"])(process.env.ASSETS_URL);
 
           case 8:
             _yield$fetchData = _context7.sent;
