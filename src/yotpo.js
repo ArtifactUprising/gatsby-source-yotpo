@@ -87,8 +87,7 @@ export const allProductBottomlines = ({ appKey, page, pageSize }) => {
       headers: {
         accept: 'application/json'
       }
-    }).then((response) => {
-      console.log('Got bottom lines!', response.data);
+    }).then((response) => { 
       resolve(response.data.response.bottomlines);
     }).catch((error) => {
       console.log('All product bottom line error', error);
@@ -109,8 +108,7 @@ export const allSiteBottomlines = ({ appKey, page, pageSize }) => {
         accept: 'application/json'
       }
     }).then((response) => {
-      console.log('Got site bottom line!', response.data);
-      resolve(response.data.response.bottomline);
+      resolve([response.data.response.bottomline]);
     }).catch((error) => {
       console.log('All site bottom line error', error);
       reject(error);

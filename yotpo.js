@@ -114,7 +114,6 @@ var allProductBottomlines = function allProductBottomlines(_ref3) {
         accept: 'application/json'
       }
     }).then(function (response) {
-      console.log('Got bottom lines!', response.data);
       resolve(response.data.response.bottomlines);
     })["catch"](function (error) {
       console.log('All product bottom line error', error);
@@ -140,8 +139,7 @@ var allSiteBottomlines = function allSiteBottomlines(_ref4) {
         accept: 'application/json'
       }
     }).then(function (response) {
-      console.log('Got site bottom line!', response.data);
-      resolve(response.data.response.bottomline);
+      resolve([response.data.response.bottomline]);
     })["catch"](function (error) {
       console.log('All site bottom line error', error);
       reject(error);
