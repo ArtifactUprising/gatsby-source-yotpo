@@ -7,7 +7,7 @@ export const getAccessToken = ({ appKey, appSecret, page, pageSize }) => {
       client_secret: appSecret,
       grant_type: "client_credentials",
     }, {
-      timeout: 1500,
+      timeout: 3000,
       headers: {
         accept: 'application/json'
       }
@@ -48,7 +48,7 @@ export const allReviews = ({ appKey, accessToken, page, pageSize }) => {
         page: page,
         count: pageSize,
       },
-      timeout: 1500,
+      timeout: 3000,
       headers: {
         accept: 'application/json'
       }
@@ -64,7 +64,7 @@ export const allReviews = ({ appKey, accessToken, page, pageSize }) => {
 export const getCachedData = (assetsUrl) => {
   return new Promise((resolve, reject) => {
     axios.get(`${assetsUrl}/assets/Yotpo/reviews.json`, {
-      timeout: 1500,
+      timeout: 3000,
       headers: {
         accept: 'application/json'
       }
@@ -83,7 +83,7 @@ export const allProductBottomlines = ({ appKey, page, pageSize }) => {
         page: page,
         count: pageSize,
       },
-      timeout: 1500,
+      timeout: 3000,
       headers: {
         accept: 'application/json'
       }
@@ -103,7 +103,7 @@ export const allSiteBottomlines = ({ appKey, page, pageSize }) => {
         page: page,
         count: pageSize,
       },
-      timeout: 1500,
+      timeout: 3000,
       headers: {
         accept: 'application/json'
       }
