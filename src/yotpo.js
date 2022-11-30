@@ -48,7 +48,7 @@ export const allReviews = ({ appKey, accessToken, page, pageSize }) => {
         page: page,
         count: pageSize,
       },
-      timeout: 3000,
+      timeout: 10000,
       headers: {
         accept: 'application/json'
       }
