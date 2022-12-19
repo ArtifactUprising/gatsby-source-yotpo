@@ -20,7 +20,7 @@ var getAccessToken = function getAccessToken(_ref) {
       client_secret: appSecret,
       grant_type: "client_credentials"
     }, {
-      timeout: 1500,
+      timeout: 3000,
       headers: {
         accept: 'application/json'
       }
@@ -66,7 +66,7 @@ var allReviews = function allReviews(_ref2) {
         page: page,
         count: pageSize
       },
-      timeout: 1500,
+      timeout: 10000,
       headers: {
         accept: 'application/json'
       }
@@ -84,7 +84,7 @@ exports.allReviews = allReviews;
 var getCachedData = function getCachedData(assetsUrl) {
   return new Promise(function (resolve, reject) {
     _axios["default"].get("".concat(assetsUrl, "/assets/Yotpo/reviews.json"), {
-      timeout: 1500,
+      timeout: 3000,
       headers: {
         accept: 'application/json'
       }
@@ -109,7 +109,7 @@ var allProductBottomlines = function allProductBottomlines(_ref3) {
         page: page,
         count: pageSize
       },
-      timeout: 1500,
+      timeout: 3000,
       headers: {
         accept: 'application/json'
       }
@@ -134,7 +134,7 @@ var allSiteBottomlines = function allSiteBottomlines(_ref4) {
         page: page,
         count: pageSize
       },
-      timeout: 1500,
+      timeout: 3000,
       headers: {
         accept: 'application/json'
       }
