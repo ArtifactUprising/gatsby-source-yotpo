@@ -83,7 +83,7 @@ export const allProductBottomlines = ({ appKey, page, pageSize }) => {
         page: page,
         count: pageSize,
       },
-      timeout: 3000,
+      timeout: 10000,
       headers: {
         accept: 'application/json'
       }
@@ -103,7 +103,7 @@ export const allSiteBottomlines = ({ appKey, page, pageSize }) => {
         page: page,
         count: pageSize,
       },
-      timeout: 3000,
+      timeout: 10000,
       headers: {
         accept: 'application/json'
       }

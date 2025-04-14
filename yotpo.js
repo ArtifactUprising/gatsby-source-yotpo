@@ -109,7 +109,7 @@ var allProductBottomlines = function allProductBottomlines(_ref3) {
         page: page,
         count: pageSize
       },
-      timeout: 3000,
+      timeout: 10000,
       headers: {
         accept: 'application/json'
       }
@@ -134,7 +134,7 @@ var allSiteBottomlines = function allSiteBottomlines(_ref4) {
         page: page,
         count: pageSize
       },
-      timeout: 3000,
+      timeout: 10000,
       headers: {
         accept: 'application/json'
       }
